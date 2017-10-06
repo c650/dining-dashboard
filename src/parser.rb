@@ -4,6 +4,7 @@ require "nokogiri"
 require "open-uri"
 
 require_relative "./grabber.rb"
+require_relative "./dish.rb"
 
 module Parser
 
@@ -26,14 +27,14 @@ module Parser
 		html.css(".menu-details-station").each do |station|
 			name = station.css("h2").first.text
 
-			ret[name] = {}
+			ret[name] = []
 
 			begin
 				station.css(".menu-details-station-item a").each do |item|
 					data_content = Nokogiri::HTML(item["data-content"])
 					title = data_content.css(".title").first.text
 					description = data_content.css(".description").first.text
-					ret[name][title] = description
+					ret[name] << Dish.new(title, description)
 				end
 			rescue
 			end

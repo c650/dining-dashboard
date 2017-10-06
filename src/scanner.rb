@@ -23,17 +23,12 @@ module Scanner
 	end
 
 	# Scans menu for possible allergens according to dish descriptions.
-	# Returns an Array of Flags.
 	def Scanner.scan_menu(menu)
-		results = []
-		menu.each do |meal_period, items|
-			items.each do |station, dishes|
-				dishes.each do |dish, desc|
-					results << Flag.new(meal_period, station, dish, desc) unless Scanner.check_dish(dish, desc)
-				end
+		menu.each do |meal_period, stations|
+			stations.each do |station, dishes|
+				dishes.each{|dish| dish.flagged = !Scanner.check_dish(dish.name, dish.description)}
 			end
 		end
-		return results
 	end
 
 	# Checks if a dish contains any of the keywords.
