@@ -1,0 +1,27 @@
+<head>
+	<title>Food Dashboard</title>
+
+	<style>
+		* {
+			background: black;
+			color: white
+		}
+		.flagged {
+			color: red;
+		}
+		.not-flagged {
+		}
+	</style>
+</head>
+<body>
+	<% @menu.each do |meal_period, stations| %>
+		<h1><%= meal_period %></h1>
+
+		<% stations.each do |station, dishes| %>
+			<h2><%=station%></h2>
+			<% dishes.each do |dish| %>
+				<p class="<%= dish.flagged ? "flagged" : "not-flagged"%>"><%= dish.to_s %></p>
+			<% end %>
+		<% end %>
+	<% end %>
+</body>
