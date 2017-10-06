@@ -2,4 +2,6 @@
 
 require_relative "../src/parser.rb"
 
-puts Parser.parse("knightro\'s")
+require "pp"
+
+pp Parser.parse("knightro\'s")
