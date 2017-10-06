@@ -9,7 +9,6 @@ module Scanner
 	]
 
 	class Flag
-<<<<<<< HEAD
 		attr_reader :meal_p, :station, :dish, :desc
 		def initialize(meal_p, station, dish, desc)
 			@meal_p = meal_p
@@ -20,13 +19,6 @@ module Scanner
 
 		def to_s
 			puts "#{@meal_p}: #{@station} -> #{@dish} (#{@desc})"
-=======
-		attr_reader :meal_p, :station, :dish
-		def initialize(meal_p, station, dish)
-			@meal_p = meal_p
-			@station = station
-			@dish = dish
->>>>>>> 6977586c156925068b49d80e8e947e00d819fad3
 		end
 	end
 
@@ -34,22 +26,10 @@ module Scanner
 	# Returns an Array of Flags.
 	def Scanner.scan_menu(menu)
 		results = []
-<<<<<<< HEAD
 		menu.each do |meal_period, items|
 			items.each do |station, dishes|
 				dishes.each do |dish, desc|
 					results << Flag.new(meal_period, station, dish, desc) unless Scanner.check_dish(dish, desc)
-=======
-		menu.each do |meal_period|
-			# puts meal_period
-			meal_period.each do |station, stuff|
-				puts station
-				puts stuff
-				stuff.each do |dish, desc|
-					unless check_dish(dish, desc)
-						results << Flag.new(meal_period, station, dish)
-					end
->>>>>>> 6977586c156925068b49d80e8e947e00d819fad3
 				end
 			end
 		end
