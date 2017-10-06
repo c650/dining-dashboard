@@ -18,7 +18,7 @@ module Scanner
 		end
 
 		def to_s
-			puts "#{@meal_p}: #{@station} -> #{@dish} (#{@desc})"
+			"#{@meal_p}: #{@station} -> #{@dish} (#{@desc})"
 		end
 	end
 
