@@ -1,5 +1,5 @@
 <head>
-	<title>Food Dashboard</title>
+	<title><%= @title%> Food Dashboard</title>
 
 	<style>
 		* {
@@ -14,13 +14,23 @@
 	</style>
 </head>
 <body>
+
+	<!-- Make links to each meal. -->
 	<% @menu.each do |meal_period, stations| %>
-		<h1><%= meal_period %></h1>
+		<a href="#<%=meal_period.gsub(/\s/,"")%>"><%= meal_period %></a>
+	<% end %>
+
+	<!-- Present each meal's menu. -->
+	<% @menu.each do |meal_period, stations| %>
+		<h1 id="<%=meal_period.gsub(/\s/,"")%>"><%= meal_period %></h1>
 
 		<% stations.each do |station, dishes| %>
 			<h2><%=station%></h2>
 			<% dishes.each do |dish| %>
 				<p class="<%= dish.flagged ? "flagged" : "not-flagged"%>"><%= dish.to_s %></p>
+			<% end %>
+			<% if dishes.empty? %>
+				<p>Nothing to show here.</p>
 			<% end %>
 		<% end %>
 	<% end %>
