@@ -1,29 +1,26 @@
 #!/usr/bin/env ruby
 
+require "json"
+
 # Module to scan menu items in hash table for possible allergens.
 module Scanner
 
-	KEYWORDS = [
-		"peanut",
-		"nut"
-	]
+	KEYWORDS = []
 
-	class Flag
-		attr_reader :meal_p, :station, :dish, :desc
-		def initialize(meal_p, station, dish, desc)
-			@meal_p = meal_p
-			@station = station
-			@dish = dish
-			@desc = desc
-		end
+	def Scanner.load_keywords
+		# take first argument to program as filepath if it exists.
+		filepath = ARGV.empty? ? "./keywords.json" : ARGV.first
 
-		def to_s
-			"#{@meal_p}: #{@station} -> #{@dish} (#{@desc})"
-		end
+		KEYWORDS << JSON.parse(File.read(filepath))["keywords"]
+		KEYWORDS.flatten!
 	end
 
 	# Scans menu for possible allergens according to dish descriptions.
 	def Scanner.scan_menu(menu)
+
+		# load the keywords if there are none.
+		load_keywords if KEYWORDS.empty?
+
 		menu.each do |meal_period, stations|
 			stations.each do |station, dishes|
 				dishes.each{|dish| dish.flagged = !Scanner.check_dish(dish.name, dish.description)}
