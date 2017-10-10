@@ -1,4 +1,4 @@
-
+#!/usr/bin/env ruby
 require_relative "./parser.rb"
 require_relative "./scanner.rb"
 
