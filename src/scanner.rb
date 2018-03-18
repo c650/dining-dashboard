@@ -35,7 +35,7 @@ module Scanner
 		clear = true
 		KEYWORDS.each do |word|
 			# puts "#{dish} : #{desc}"
-			clear = clear && !(dish.include?(word) || desc.include?(word))
+			clear = clear && !(dish.downcase.include?(word) || desc.downcase.include?(word))
 		end
 		return clear
 	end
