@@ -13,7 +13,7 @@ def generate(location)
 	result = ERB.new(File.open("./dashboard.erb").read()).result()
 
 	name = Array.new(10).map{rand(97..122).chr}.join("")
-	name = "/tmp/#{name}.html"
+	name = "/tmp/#{location.gsub(/[^a-zA-Z]/,"")}#{name}.html"
 
 	File.open(name, 'w'){|file| file.write(result)}
 
